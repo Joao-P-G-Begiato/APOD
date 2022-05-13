@@ -2,7 +2,7 @@ let rocket = {}
 
 $("#submit").click(function(e){
     e.preventDefault()
-    rocketLaunch()
+    verificaEntrada()
 })
 
 function rocketLaunch(){
@@ -20,6 +20,8 @@ $.ajax({
 function rocketPackage(){
     $("h3, h2").css("display", "inline-block")
     $("#descricao").html(`${rocket.explanation}`)
+    $("#descricao").css("padding", "0.5rem")
+    
     if(rocket.media_type === "image"){
         $("#media").html(`<img class="tooltip" src=${rocket.url}>
         <span class="tooltiptext"><em> ${rocket.title}</em> </span> 
@@ -40,3 +42,16 @@ function rocketPackage(){
     } 
 }
 
+function verificaEntrada(){
+    if ($("#data").val() > "1995-06-16" && $("#data").val() <= new Date().toISOString().split("T")[0]){
+        rocketLaunch()
+    }else{
+        $("#media").empty()
+        $("#caption").empty()
+        $("h2").css("display","none")
+        $("h3").css("display","none")
+        $("#descricao").html("Infelizmente sua requisição não pode ser atendida, a data de pesquisa deve ser entre 16/06/1995 e a data de hoje. pois ainda não temos a mídia de uma data futura e o projeto começou dia 16/06/1995");
+        $("#descricao").css("padding", "1rem")
+    }
+
+}
