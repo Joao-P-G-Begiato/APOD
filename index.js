@@ -26,10 +26,12 @@ function rocketPackage(){
         $("#media").html(`<img class="tooltip" src=${rocket.url}>
         <span class="tooltiptext"><em> ${rocket.title}</em> </span> 
         `)
-    }else{
+    }else if(rocket.media_type === "video"){
         $("#media").html(`<iframe src=${rocket.url}> </iframe><br><span> Título do Vídeo:<em> ${rocket.title} </em></span> `)
-        
+    }else{
+        $("#media").html(`esta data não tem mídia associada.`)
     }
+
     try{
         if(rocket.copyright != undefined){
         $("#caption").html(`<em>copyright:${rocket.copyright}</em>`)
